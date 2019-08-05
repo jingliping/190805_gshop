@@ -1,0 +1,65 @@
+/*
+语法的不同：
+scss 是 @mixin fn(a){}
+stylus 是 fn(a=1px){} //可设置参数默认值
+*/
+btn($color) {
+  background: $color;
+  color: #444;
+  &:hover {
+    background: lighten(hsl(0, 50%, 50%), 10%);
+    &:before,
+    &:after {
+      background: lighten(@color, 10%);
+    }
+  }
+}
+
+// 一像素下边框
+bottom-border-1px($color)
+  position relative
+  &::before
+    content ''
+    position absolute
+    left 0
+    bottom 0
+    width 100%
+    height 1px
+    background-color $color
+    transform scaleY(0.5)
+
+// 一像素上边框
+top-border-1px($color)
+  position relative
+  &::before
+    content ''
+    position absolute
+    left 0
+    top 0
+    width 100%
+    height 1px
+    background-color $color
+
+//根据像素比缩放1px像素边框
+@media only screen and (-webkit-device-pixel-ratio:2 )
+  .border-1px
+    &::before
+      transform scaleY(.5)
+@media only screen and (-webkit-device-pixel-ratio:3 )
+  .border-1px
+    &::before
+      transform scaleY(.333333)
+
+//根据像素比来使用 2x图 3x图
+bg-image($url)
+  background-image:url($url+"@2x.png")
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    background-image:url($url+"@3x.png")
+
+//清除浮动
+clearFix()
+  *zoom 1
+  &::after
+    content ''
+    display block
+    clear both

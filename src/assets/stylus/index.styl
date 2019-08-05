@@ -1,0 +1,244 @@
+@import "./variables.styl";
+@import "./mixins.styl";
+@import "./btn.styl";
+
+/*
+	一些复合使用写起来简单的关键词，尽量不单独定义样式：
+	cur, item, disabled, checked, selected, right、left, on、off,   red、org、yellow、blue、green,   one、two、three、four、five, 等言简意赅的命名
+	一些简写：
+	-t、-b(top、bottom), -t、-c(tit、con)等
+	几种情况：
+	一种是粘合度很高的用a-b-c的命名方式，
+	一种是粘合度不是那么高可以用类似a.f中f的命名方式,这里f是属于次之命名，言简 意赅（.nav a.home ，.nav a.cate ，.nav a.user）
+	粘合度最高可以用abc这样
+*/
+
+
+/* ************ reset ************************************************** */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,fieldset,legend,form,select,option,button,input,textarea,p,blockquote,th,td,span,i,em,a,img,
+header, footer, section, nav, menu, details, hgroup, figure, figcaption, article, aside
+{
+	margin:0;
+	padding:0;
+	-webkit-text-size-adjust:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:400}
+fieldset,img,input{border:none;border:0;}
+a,input:focus{outline:none}
+a{text-decoration: none;}
+button{border:none;vertical-align:middle;cursor:pointer}
+table{border-collapse:collapse;border-spacing:0;}
+address,caption,cite,code,em,strong,th,var,i{font-weight:normal;font-style:normal;}
+ol,ul,dl{list-style:none;}
+
+
+body {
+  height: 100%;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+
+	color: #323232;
+	font-size: 14px;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+
+/* ****************通用类 ****************************************************************** */
+/* 颜色 */
+.gray6{color:#666;}
+.gray9{color:#999;}
+.grayc{color:#ccc;}
+.graye{color:#eee;}
+/* 浮动 */
+.fl{float:left;}
+.fr{float:right;}
+.clearfix{zoom:1;}
+.clearfix:after{content:"";display:block;height:0;clear:both;visibility:hidden;}
+.clear{clear:both;}
+
+
+/* 对齐 */
+.tl{text-align:left!important;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.indent2{text-indent: 2em;}
+
+
+/* 显示 */
+.dn{display: none;}
+.db{display:block!important;}
+.dib{display:inline-block;}
+.hidden{overflow:hidden;}
+
+
+/* font-family */
+.tahoma{font-family:tahoma;}
+
+
+/* 边距 */
+.mt5{margin-top:5px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top:20px;}
+.mr5{margin-right:5px;}
+.mr10{margin-right:10px;}
+.mr15{margin-right:15px;}
+.mr20{margin-right:20px;}
+
+.mb50{margin-bottom:50px;}
+
+.p5{padding:5px;}
+.p10{padding:10px;}
+.p15{padding:15px;}
+.p20{padding:20px;}
+
+.pt5{padding-top:5px;}
+.pt10{padding-top:10px;}
+.pt15{padding-top:15px;}
+.pt20{padding-top:20px;}
+
+.pl5{padding-left:5px;}
+.pl10{padding-left:10px;}
+.pl15{padding-left:15px;}
+.pl20{padding-left:20px;}
+
+.pr5{padding-right:5px;}
+.pr10{padding-right:10px;}
+.pr15{padding-right:15px;}
+.pr20{padding-right:20px;}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+
+/* 定位 */
+.pr{position: relative;}
+.pf-b,.pf-t{
+	position: fixed;
+	z-index:999;
+	right: 0;
+	left: 0;
+}
+.pf-t{top: 0;}
+.pf-b{bottom: 0;}
+
+
+/* 居中 */
+.bc{margin-left:auto!important;margin-right:auto!important;}
+
+
+/* shadow */
+.bs{box-shadow:0 1px 0 rgba(0,0,0,0.1);}
+
+
+/* 行数 行高用倍数好用~~~ ,ie7不会出现大字体行高是个细条的情况 */
+.row-one{height:1.3em;line-height: 1.3em;overflow:hidden;display: block;}
+.row-two{height:2.5em;line-height: 1.35em;overflow: hidden;display: block;}
+.row-two-max{max-height:2.6em;line-height: 1.3em;overflow: hidden;display: block;}
+/* 用在这一行的高度不影响排版的情况，由于多列的每个item高度不同的话会影响排版，就不能用这个类， */
+
+/* ellipsis  一行，两行 */
+.ellipsis{
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	white-space:nowrap; 
+}
+.ellipsis-two{
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	display: box;
+	display: -webkit-box;
+	display: -moz-box;
+	line-clamp: 2;
+	-webkit-line-clamp: 2;
+	-moz-line-clamp: 2;
+	box-orient: vertical;
+	// -webkit-box-orient: vertical;
+	// -moz-box-orient: vertical; //测试autoprefixer
+}
+
+/* 换行与否 */
+.wordbreak{word-wrap:break-word;word-break:break-all;}
+.nowrap{white-space:nowrap;}
+
+
+/* 图片 */
+img{ vertical-align: middle;}
+.img-rounded { border-radius: 6px;}
+.img-circle{ border-radius: 50%;}
+.img-thumbnail {
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+       transition: all 0.2s ease-in-out;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* form */
+.input{	
+  border:1px solid #ddd; 
+  background-color:#fff;
+  text-indent:.3em;
+  transition:box-shadow .3s;
+}
+.input:focus{box-shadow:0 0 0 1px rgba(2,156,236,1);}
+.input.s{height:28px;line-height:28px;}
+.input.m{height:32px;line-height:32px;}
+.input.l{height:40px;line-height:40px;;}
+textarea{padding:5px;resize:none;}
+
+
+
+
+
+
+/* *******************************页面*********************************************************************** */
+
+body{
+  background-color #F4F3F9
+}
