@@ -1,7 +1,8 @@
 <template>
   <section class="profile">
     <HeaderTop title="我的"></HeaderTop>
-    <section class="profile-number">
+    <!-- 未登录 -->
+    <section class="profile-card logout" style="display:none;">
       <router-link to="/login" class="profile-link">
         <div class="profile_image">
           <i class="iconfont icon-person"></i>
@@ -18,37 +19,32 @@
         <span class="arrow">
           <i class="iconfont icon-jiantou1"></i>
         </span>
-      </router-link >
+      </router-link>
     </section>
-    <section class="profile_info_data border-1px">
-      <ul class="info_data_list">
-        <a href="javascript:" class="info_data_link">
-          <span class="info_data_top">
-            <span></span>
-          </span>
-          <span class="info_data_bottom"></span>
-        </a>
-        <a href="javascript:" class="info_data_link">
-          <span class="info_data_top">
-            <span></span>
-          </span>
-          <span class="info_data_bottom"></span>
-        </a>
-        <a href="javascript:" class="info_data_link">
-          <span class="info_data_top">
-            <span></span>
-          </span>
-          <span class="info_data_bottom"></span>
-        </a>
-      </ul>
+    <!-- 已登录 -->
+    <section class="profile-card login">
+      <div class="profile-link">
+        <div class="user-info">
+          <p class="user-info-top">澳立奇科技000</p>
+          <p class="user-name">
+            JingLiPing
+          </p>
+        </div>
+        <!-- 头像 -->
+        <div class="profile_image">
+          <img src="https://p.qlogo.cn/bizmail/iaXgbDHszsuiaibvV8NI3FmzK68cOic7xVE5W6Meibdq9uF7DrwVDd0sfBQ/0" width="100%">
+        </div>
+      </div>
+
+      <div class="card-text">名片信息</div>
     </section>
+
+
     <section class="profile_my_order border-1px">
       <!--  -->
       <a href="javascript:" class="my_order">
-        <span>
-          <i class="iconfont icon-order-s"></i>
-        </span>
         <div class="my_order_div">
+          <span><i class="iconfont icon-order-s"></i></span>
           <span>公司信息</span>
           <span class="my_order_icon">
             <i class="iconfont icon-jiantou1"></i>
@@ -57,10 +53,8 @@
       </a>
       <!--  -->
       <a href="javascript:" class="my_order">
-        <span>
-          <i class="iconfont icon-jifen"></i>
-        </span>
         <div class="my_order_div">
+          <span><i class="iconfont icon-jifen"></i></span>
           <span>企业文化</span>
           <span class="my_order_icon">
             <i class="iconfont icon-jiantou1"></i>
@@ -69,10 +63,8 @@
       </a>
       <!--  -->
       <a href="javascript:" class="my_order">
-        <span>
-          <i class="iconfont icon-vip"></i>
-        </span>
         <div class="my_order_div">
+          <span><i class="iconfont icon-vip"></i></span>
           <span>个人信息</span>
           <span class="my_order_icon">
             <i class="iconfont icon-jiantou1"></i>
@@ -83,11 +75,21 @@
     <section class="profile_my_order border-1px">
       <!--  -->
       <a href="javascript:" class="my_order">
-        <span>
-          <i class="iconfont icon-fuwu"></i>
-        </span>
         <div class="my_order_div">
+          <span><i class="iconfont icon-fuwu"></i></span>
           <span>实名认证</span>
+          <span class="my_order_icon">
+            <i class="iconfont icon-jiantou1"></i>
+          </span>
+        </div>
+      </a>
+    </section>
+    <section class="profile_my_order border-1px">
+      <!--  -->
+      <a href="javascript:" class="my_order">
+        <div class="my_order_div">
+          <span><i class="iconfont icon-fuwu"></i></span>
+          <span>设置</span>
           <span class="my_order_icon">
             <i class="iconfont icon-jiantou1"></i>
           </span>
@@ -110,18 +112,24 @@ export default {
 @import "../../assets/stylus/mixins.styl"
 .profile //我的
   width 100%
-  .profile-number
+  .profile-card
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 11px;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    overflow: hidden;
+    background #fff
+    color: #444;
     .profile-link
-      clearFix()
       position relative
       display block
-      background #3a71a8
       padding 20px 10px
       .profile_image
         float left
         width 60px
         height 60px
-        border-radius 50%
+        border-radius 2px
         overflow hidden
         vertical-align top
         .icon-person
@@ -134,7 +142,6 @@ export default {
         p
           font-weight: 700
           font-size 18px
-          color #fff
           &.user-info-top
             padding-bottom 8px
           .user-icon
@@ -156,8 +163,28 @@ export default {
         right 15px
         top 40%
         .icon-jiantou1
-          color #fff
           font-size 5px
+  .profile-card.logout
+    .profile-link
+      clearFix()
+  .profile-card.login
+    width 92%
+    .profile-link
+      display flex
+      justify-content space-between
+    .user-info
+      .user-info-top
+        font-weight: 400
+        font-size 16px
+      .user-name
+        margin-top 70px
+    .profile_image
+      margin-right 18px  
+    .card-text
+      top-border-1px(#eee)
+      padding 15px 20px
+      color #ccc
+      text-align right
   .profile_info_data
     bottom-border-1px(#e4e4e4)
     width 100%
@@ -202,38 +229,38 @@ export default {
     margin-top 10px
     background #fff
     .my_order
-      display flex
-      align-items center
       padding-left 15px
-      >span
-        display flex
-        align-items center
-        width 20px
-        height 20px
-        >.iconfont
-          margin-left -10px
-          font-size 30px
-        .icon-order-s
-          color #02a774
-        .icon-jifen
-          color #ff5f3e
-        .icon-vip
-          color #f90
-        .icon-fuwu
-          color #02a774
+      display block
+      &:nth-child(1)
+        span:nth-child(1)
+          background-color #F2BC1F
+      &:nth-child(2)
+        span:nth-child(1)
+          background-color #31b2f5
+      &:nth-child(3)
+        span:nth-child(1)
+          background-color #FC7355
+      &:nth-child(4)
+        span:nth-child(1)
+          background-color #3b8ed2
       .my_order_div
-        width 100%
         border-bottom 1px solid #f1f1f1
-        padding 18px 10px 18px 0
-        font-size 16px
-        color #333
+        padding 10px 10px 10px 0
         display flex
         justify-content space-between
-        span
-          display block
+        align-items: center
+        span:nth-child(1)
+          display inline-block
+          width 28px
+          height 28px
+          margin-right: 15px;
+          .iconfont
+            font-size 28px
+            color #fff
+        span:nth-child(2)
+          flex-grow 1
+          font-size 16px
         .my_order_icon
-          width 10px
-          height 10px
           .icon-jiantou1
             color #bbb
             font-size 10px

@@ -14,12 +14,13 @@
     <!-- 轮播图 -->
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="./images/banner/1.png" width="100%" />
+          <div class="swiper-slide" v-for="item in luoboList" :key="item.id">
+            <img :src="item.image_url" width="100%" />
+            {{item.image_url}}
           </div>
-          <div class="swiper-slide">
+          <!-- <div class="swiper-slide">
             <img src="./images/banner/1.png" width="100%" />
-          </div>
+          </div> -->
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
@@ -94,16 +95,30 @@ import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 import HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
 import ShopList from '../../components/ShopList/ShopList.vue'
+
+import {reqFoodCategorys} from '../../api'
+
 export default {
-  mounted(){
+  async mounted(){
     // banner轮播图
-    new Swiper()
     new Swiper('.swiper-container',{
       loop: true,
       pagination: {
         el: '.swiper-pagination'
       }
     })
+
+    //异步获取数据
+    const result = await reqFoodCategorys();
+    //console.log(result.data)
+    this.luoboList = result.data;
+    console.log(this.luoboList)
+
+  },
+  data(){
+    return {
+      luoboList: []
+    }
   },
   components: {
     HeaderTop,

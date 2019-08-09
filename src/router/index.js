@@ -8,6 +8,7 @@ import Message from '../views/Message/Message.vue'
 import Profile from '../views/Profile/Profile.vue'
 import AddressBook from '../views/AddressBook/AddressBook.vue'
 import Login from '../views/Login/Login.vue'
+import WorkMate from '../views/WorkMate/WorkMate.vue'
 
 
 Vue.use(Router)
@@ -50,6 +51,10 @@ export default new Router({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '/workmate',
+      component: WorkMate
     }
   ]
 })
